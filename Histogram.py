@@ -10,8 +10,8 @@ def equalizes(img,hist,cdf):
     col = np.size(img,1)
     newImg= np.zeros((row,col),np.uint8)
     for x in range(0,255):
-        H= (cdf[x]-cdf[np.min(img)])/(cdf[254]-cdf1[np.min(img)])
-        H=round(H*255)
+        H= (cdf[x]*255-cdf[np.min(img)]*255)/(cdf[254]-cdf[np.min(img)])
+        H=round(H)
         newImg[img==x]=H
            
        
@@ -37,16 +37,16 @@ plt.show()
 
 
 
-hist1 = cv2.calcHist([img1],[0],None,[256],[0,255])
-hist2 = cv2.calcHist([img2],[0],None,[256],[0,255])
+hist1,bins = np.histogram([img1],bins=range(256))
+
+hist2 = cv2.calcHist([img1],[0],None,[256],[0,255])
 hist3 = cv2.calcHist([img3],[0],None,[256],[0,255])
 hist4 = cv2.calcHist([img4],[0],None,[256],[0,255])
 hist5 = cv2.calcHist([img5],[0],None,[256],[0,255])
  
     
-hist1.astype(int)
 
-plt.subplot(511),plt.bar(hist1),plt.title("format:TIFF")
+plt.subplot(511),plt.plot(hist1),plt.title("format:TIFF")
 plt.subplot(512),plt.plot(hist2),plt.title("format:PNG")
 plt.subplot(513),plt.plot(hist3),plt.title("format:GIF")
 plt.subplot(514),plt.plot(hist4),plt.title("format:JPG")
@@ -78,7 +78,7 @@ plt.subplot(153),plt.imshow(img3,cmap="gray"),plt.axis("off"),plt.title("format:
 plt.subplot(154),plt.imshow(img4,cmap="gray"),plt.axis("off"),plt.title("format:JPG")
 plt.subplot(155),plt.imshow(img4,cmap="gray"),plt.axis("off"),plt.title("format:BMP")
 plt.show()
-hist1 = cv2.calcHist([img1],[0],None,[255],[0,255])
+hist1,bins = np.histogram([img1],bins=range(256))
 hist2 = cv2.calcHist([img2],[0],None,[255],[0,255])
 hist3 = cv2.calcHist([img3],[0],None,[255],[0,255])
 hist4 = cv2.calcHist([img4],[0],None,[255],[0,255])
