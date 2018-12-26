@@ -1,9 +1,6 @@
 import cv2
 import numpy as np
 from matplotlib import pyplot as plt
-
-
-
 img = cv2.imread('5.jpg',0) 
 kernel = np.ones((3,3),np.uint8)
 
@@ -28,6 +25,4 @@ plt.subplot(3,2,4),plt.imshow(opening,cmap = 'gray')
 plt.title('Opening'), plt.xticks([]), plt.yticks([])
 plt.subplot(3,2,5),plt.imshow(closing,cmap = 'gray')
 plt.title('Closing'), plt.xticks([]), plt.yticks([])
-
-
 plt.show()
